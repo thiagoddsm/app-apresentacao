@@ -42,42 +42,47 @@
 
     <script src="script.js"></script>
     <script>
-        // Lógica específica do Apresentador
-        const slideContent = document.getElementById('slide-content');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const slideCounter = document.getElementById('slide-counter');
+        // Adiciona um listener para garantir que o script só rode após o carregamento da página
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica específica do Apresentador
+            const slideContent = document.getElementById('slide-content');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const slideCounter = document.getElementById('slide-counter');
 
-        let currentSlideIndex = 0;
-        const presentationRef = database.ref('presentation/currentSlide');
+            let currentSlideIndex = 0;
+            const presentationRef = database.ref('presentation/currentSlide');
 
-        function updateSlide() {
-            if (slides && slides[currentSlideIndex]) {
-                // Atualiza a tela do apresentador
-                slideContent.innerHTML = slides[currentSlideIndex].apresentador;
-                slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+            function updateSlide() {
+                // Verifica se a variável 'slides' existe antes de usá-la
+                if (typeof slides !== 'undefined' && slides[currentSlideIndex]) {
+                    // Atualiza a tela do apresentador
+                    slideContent.innerHTML = slides[currentSlideIndex].apresentador;
+                    slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
 
-                // Atualiza o Firebase para que o espectador receba a mudança
-                presentationRef.set(currentSlideIndex);
+                    // Atualiza o Firebase para que o espectador receba a mudança
+                    presentationRef.set(currentSlideIndex);
+                }
             }
-        }
 
-        nextBtn.addEventListener('click', () => {
-            if (currentSlideIndex < slides.length - 1) {
-                currentSlideIndex++;
-                updateSlide();
-            }
+            nextBtn.addEventListener('click', () => {
+                if (typeof slides !== 'undefined' && currentSlideIndex < slides.length - 1) {
+                    currentSlideIndex++;
+                    updateSlide();
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (currentSlideIndex > 0) {
+                    currentSlideIndex--;
+                    updateSlide();
+                }
+            });
+
+            // Inicia a apresentação no primeiro slide
+            updateSlide();
         });
-
-        prevBtn.addEventListener('click', () => {
-            if (currentSlideIndex > 0) {
-                currentSlideIndex--;
-                updateSlide();
-            }
-        });
-
-        // Inicia a apresentação no primeiro slide
-        updateSlide();
     </script>
 </body>
 </html>
+
