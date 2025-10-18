@@ -10,7 +10,8 @@
     <div class="container apresentador">
         <h1>Tela do Apresentador</h1>
         <div id="slide-content" class="slide">
-            </div>
+            <!-- O conteúdo do slide aparece aqui -->
+        </div>
         <div class="controls">
             <button id="prevBtn">Anterior</button>
             <span id="slide-counter">0 / 0</span>
@@ -18,19 +19,20 @@
         </div>
     </div>
 
+    <!-- SDKs do Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // COLE AQUI O SEU OBJETO firebaseConfig DO FIREBASE
+        // SUA CONFIGURAÇÃO DO FIREBASE
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY",
-            authDomain: "SEU_AUTH_DOMAIN",
-            databaseURL: "SUA_DATABASE_URL",
-            projectId: "SEU_PROJECT_ID",
-            storageBucket: "SEU_STORAGE_BUCKET",
-            messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-            appId: "SEU_APP_ID"
+            apiKey: "AIzaSyC8a1ViD4lRkhJ5hBaJLVbzm3JH8XhZdZQ",
+            authDomain: "studio-7497577336-6d2b4.firebaseapp.com",
+            databaseURL: "https://studio-7497577336-6d2b4-default-rtdb.firebaseio.com",
+            projectId: "studio-7497577336-6d2b4",
+            storageBucket: "studio-7497577336-6d2b4.appspot.com", // Corrigido para o formato correto do SDK 8
+            messagingSenderId: "283066125474",
+            appId: "1:283066125474:web:65b010e98b4b0c5b5b1bfb"
         };
 
         // Inicializa o Firebase
@@ -50,12 +52,14 @@
         const presentationRef = database.ref('presentation/currentSlide');
 
         function updateSlide() {
-            // Atualiza a tela do apresentador
-            slideContent.innerHTML = slides[currentSlideIndex].apresentador;
-            slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+            if (slides && slides[currentSlideIndex]) {
+                // Atualiza a tela do apresentador
+                slideContent.innerHTML = slides[currentSlideIndex].apresentador;
+                slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
 
-            // Atualiza o Firebase para que o espectador receba a mudança
-            presentationRef.set(currentSlideIndex);
+                // Atualiza o Firebase para que o espectador receba a mudança
+                presentationRef.set(currentSlideIndex);
+            }
         }
 
         nextBtn.addEventListener('click', () => {
