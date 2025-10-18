@@ -3,20 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação!</title>
+    <title>Workshop GC Abençoador</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+         html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+        }
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        .fade-transition {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .is-fading {
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
     <!-- Container principal do slide -->
-    <div id="slide-content" class="slide-container">
-        <h2>Aguardando o apresentador iniciar...</h2>
+    <div id="slide-content" class="slide-container fade-transition">
+        <h2 class="text-3xl font-bold">Aguardando o apresentador iniciar...</h2>
     </div>
 
     <!-- SDKs do Firebase -->
@@ -24,144 +49,186 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // SUA CONFIGURAÇÃO DO FIREBASE
+        // SUBSTITUA PELA SUA CONFIGURAÇÃO DO FIREBASE
         const firebaseConfig = {
-            apiKey: "AIzaSyC8a1ViD4lRkhJ5hBaJLVbzm3JH8XhZdZQ",
-            authDomain: "studio-7497577336-6d2b4.firebaseapp.com",
-            databaseURL: "https://studio-7497577336-6d2b4-default-rtdb.firebaseio.com",
-            projectId: "studio-7497577336-6d2b4",
-            storageBucket: "studio-7497577336-6d2b4.appspot.com",
-            messagingSenderId: "283066125474",
-            appId: "1:283066125474:web:65b010e98b4b0c5b5b1bfb"
+            apiKey: "COLE_AQUI_SUA_API_KEY",
+            authDomain: "SEU_PROJETO.firebaseapp.com",
+            databaseURL: "https://SEU_PROJETO-default-rtdb.firebaseio.com",
+            projectId: "SEU_PROJETO_ID",
+            storageBucket: "SEU_PROJETO.appspot.com",
+            messagingSenderId: "SEU_SENDER_ID",
+            appId: "SEU_APP_ID"
         };
 
         // Inicializa o Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
     </script>
-
+    
     <script>
-        // CONTEÚDO DOS SLIDES EMBUTIDO DIRETAMENTE AQUI
+        // CONTEÚDO DOS SLIDES
         const slides = [
             {
-                apresentador: `...`, // O conteúdo do apresentador não é usado aqui, mas mantido por consistência
                 espectador: `
-                    <h1>Workshop:</h1>
-                    <h2>Como ser um Membro de GC Abençoador</h2>
-                    <br>
-                    <h3>"Farei de você um grande povo, e o abençoarei. Tornarei famoso o seu nome, e você será uma bênção."</h3>
-                    <p>Gênesis 12:2</p>
+                    <header>
+                        <h1 class="text-8xl font-extrabold text-white leading-tight">Workshop</h1>
+                        <p class="text-4xl text-indigo-200 mt-4">Como ser um Membro de GC Abençoador</p>
+                    </header>
                 `
             },
             {
                 espectador: `
-                    <h2>Quebra-Gelo</h2>
-                    <p>Pense numa pessoa que, só por estar no seu GC, o torna um lugar melhor.</p>
-                    <h3>Partilhe com a pessoa ao seu lado:</h3>
-                    <p>Que característica ou atitude essa pessoa tem que abençoa tanto o grupo?</p>
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-5xl font-bold text-indigo-400 mb-8">Quebra-Gelo Conetivo</h2>
+                         <div class="bg-gray-800 p-10 rounded-2xl shadow-md text-left text-2xl space-y-4 text-slate-200">
+                            <p><b class="font-semibold text-white">Instrução:</b> "Pensem por um instante numa pessoa que, só por estar no vosso GC, o torna um lugar melhor."</p>
+                            <p><b class="font-semibold text-white">Partilhem ao lado:</b> "Que característica ou atitude essa pessoa tem que abençoa tanto o grupo?"</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>O que é um "MEMBRO"?</h1>
-                    <p>É ser parte de um corpo, interdependente.</p>
-                    <h3>"somos um só corpo em Cristo, e cada membro está ligado a todos os outros."</h3>
-                    <p>Romanos 12:5</p>
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-6xl font-bold text-white mb-8">O Alicerce: Quem Nós Somos</h2>
+                        <p class="text-3xl text-slate-300">O nosso alvo hoje é entender como um <b class="text-indigo-400">MEMBRO</b> pode ser <b class="text-indigo-400">ABENÇOADOR</b> dentro de um <b class="text-indigo-400">GC</b>.</p>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>O que é um "ABENÇOADOR"?</h1>
-                    <p>É ser um transmissor da bênção de Deus.</p>
-                    <h3>"Farei de você um grande povo... e você será uma bênção."</h3>
-                    <p>Gênesis 12:2</p>
+                    <div class="max-w-3xl text-center">
+                        <h3 class="text-5xl font-bold text-indigo-400 mb-6">MEMBRO</h3>
+                        <p class="text-3xl text-slate-300 mb-8">Parte interdependente de um corpo.</p>
+                        <blockquote class="text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400">
+                            "Pois, assim como em um corpo temos muitos membros... assim também nós, embora muitos, somos um só corpo em Cristo, e cada membro está ligado a todos os outros." (Romanos 12:4-5)
+                        </blockquote>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>O que é um "GC"?</h1>
-                    <p>Um grupo que vive em comunhão (koinonia).</p>
-                    <h3>"Eles perseveravam na doutrina dos apóstolos e na comunhão..."</h3>
-                    <p>Atos 2:42</p>
+                    <div class="max-w-3xl text-center">
+                        <h3 class="text-5xl font-bold text-indigo-400 mb-6">ABENÇOADOR</h3>
+                        <p class="text-3xl text-slate-300 mb-8">Um transmissor da bênção de Deus.</p>
+                        <blockquote class="text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400">
+                            "Farei de você um grande povo, e o abençoarei. Tornarei famoso o seu nome, e você será uma bênção." (Gênesis 12:2)
+                        </blockquote>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>Pilar 1: A Fonte da Bênção</h1>
-                    <h3>Deus é a Fonte. Nós somos o Canal.</h3>
-                    <p>"Toda boa dádiva e todo dom perfeito vêm do alto..."</p>
-                    <p>Tiago 1:17</p>
+                    <div class="max-w-3xl text-center">
+                        <h3 class="text-5xl font-bold text-indigo-400 mb-6">GC</h3>
+                        <p class="text-3xl text-slate-300 mb-8">Um grupo que persevera em comunhão e cuidado mútuo.</p>
+                        <blockquote class="text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400">
+                            "Eles perseveravam na doutrina dos apóstolos e na comunhão [koinonia], no partir do pão e nas orações." (Atos 2:42)
+                        </blockquote>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h2>Aplicação da Dinâmica</h2>
-                    <p>Quando estamos cheios de Deus, naturalmente transbordamos Sua presença.</p>
-                    <h2>Quer ser uma bênção?</h2>
-                    <p>A resposta não é "se esforce mais".<br>É <strong>"se encha mais"</strong>.</p>
+                    <div class="max-w-4xl text-center">
+                         <h2 class="text-6xl font-bold text-white mb-8">Pilar 1: A Fonte da Bênção</h2>
+                         <p class="text-3xl text-slate-300"><b class="text-indigo-400">Verdade Central:</b> Não somos a fonte da bênção, somos o canal. Só podemos transmitir aquilo que já recebemos de Deus.</p>
+                         <blockquote class="text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-10">
+                            "Toda boa dádiva e todo dom perfeito vêm do alto..." (Tiago 1:17)
+                        </blockquote>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>Pilar 2: De Consumidor a Catalisador</h1>
-                    <p>"transformem-se pela renovação da sua mente..."</p>
-                    <p>Romanos 12:2</p>
-                    <h3>Consumidor: "O que eu ganho?"</h3>
-                    <h3>Catalisador: "Como posso servir?"</h3>
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-5xl font-bold text-indigo-400 mb-8">Dinâmica: O Transbordar</h2>
+                        <div class="bg-gray-800 p-10 rounded-2xl shadow-md text-2xl space-y-4 text-slate-200">
+                            <p>Quando nos enchemos de Deus, que é a fonte de toda a bênção, o resultado natural é <b class="font-semibold text-white">transbordar</b> sobre as pessoas ao nosso redor.</p>
+                            <p class="mt-4 font-bold text-yellow-300">Quer ser uma bênção? Encha-se de Deus.</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h2>As 4 Fases do Crescimento</h2>
-                    <ol>
-                        <li><strong>Receptor:</strong> "Eu sou cuidado."</li>
-                        <li><strong>Acomodado:</strong> "Eu participo."</li>
-                        <li><strong>Canal de Bênção:</strong> "Eu cuido dos outros."</li>
-                        <li><strong>Multiplicador:</strong> "Eu formo outros."</li>
-                    </ol>
-                    <h3>Onde você se vê hoje?</h3>
+                    <div class="max-w-4xl text-center">
+                         <h2 class="text-6xl font-bold text-white mb-8">Pilar 2: A Atitude da Bênção</h2>
+                         <p class="text-3xl text-slate-300"><b class="text-indigo-400">Verdade Central:</b> Somos chamados a renovar a nossa mente, trocando a atitude de <b class="text-red-400">Consumidor</b> pela de <b class="text-green-400">Catalisador</b>.</p>
+                         <blockquote class="text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-10">
+                            "Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente..." (Romanos 12:2)
+                        </blockquote>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h2>Atividade: Cenário 1</h2>
-                    <h3>"Chega um visitante no GC."</h3>
-                    <p><strong>Consumidor:</strong> Espera que o líder o apresente.</p>
-                    <p><strong>Catalisador:</strong> Vai até ele e o inclui na conversa.</p>
+                     <div class="max-w-5xl w-full grid grid-cols-2 gap-10">
+                        <div class="bg-red-900/50 border-2 border-red-500 p-8 rounded-2xl">
+                            <h3 class="text-3xl font-bold text-red-400">Consumidor</h3>
+                            <p class="text-2xl text-red-300 mt-4">"O que este GC pode fazer por mim?"</p>
+                        </div>
+                        <div class="bg-green-900/50 border-2 border-green-500 p-8 rounded-2xl">
+                            <h3 class="text-3xl font-bold text-green-400">Catalisador</h3>
+                            <p class="text-2xl text-green-300 mt-4">"Quem posso abençoar neste GC?"</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h2>Atividade: Cenário 2</h2>
-                    <h3>"Um membro partilha uma dificuldade."</h3>
-                    <p><strong>Consumidor:</strong> Ouve passivamente.</p>
-                    <p><strong>Catalisador:</strong> Ouve, ora e acompanha depois.</p>
+                    <div class="max-w-3xl text-center">
+                        <h3 class="text-5xl font-semibold text-white mb-10">As 4 Fases do Crescimento:<br>Onde me vejo hoje?</h3>
+                        <div class="space-y-4 text-2xl text-left text-slate-300 bg-gray-800 p-8 rounded-xl shadow-md">
+                            <p><b class="text-indigo-400">1. O Receptor:</b> "Eu sou cuidado."</p>
+                            <p><b class="text-indigo-400">2. O Acomodado:</b> "Eu participo."</p>
+                            <p><b class="text-indigo-400">3. O Canal de Bênção:</b> "Eu cuido dos outros."</p>
+                            <p><b class="text-indigo-400">4. O Multiplicador:</b> "Eu ajudo a formar novos catalisadores."</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>Pilar 3: A Prática da Bênção (24/7)</h1>
-                    <ul>
-                        <li><strong>Antes:</strong> Ore por oportunidades.</li>
-                        <li><strong>Durante:</strong> Esteja presente.</li>
-                        <li><strong>Depois:</strong> Acompanhe e cuide.</li>
-                    </ul>
+                    <div class="max-w-4xl text-center">
+                        <h2 class="text-5xl font-bold text-indigo-400 mb-8">Atividade: Consumidor vs. Catalisador</h2>
+                        <div class="text-2xl space-y-6 text-slate-200">
+                            <p class="bg-gray-800 p-6 rounded-xl shadow-md"><b>Cenário 1:</b> Chega um visitante no GC, tímido e desconfortável.</p>
+                            <p class="bg-gray-800 p-6 rounded-xl shadow-md"><b>Cenário 2:</b> Um membro partilha sobre uma dificuldade que tem enfrentado.</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>Recapitulando</h1>
-                    <h2>1. Comece com sua IDENTIDADE.</h2>
-                    <h2>2. Seja o CANAL, não a fonte.</h2>
-                    <h2>3. Mude de CONSUMIDOR para CATALISADOR.</h2>
+                    <div class="max-w-5xl text-center">
+                         <h2 class="text-6xl font-bold text-white mb-8">Pilar 3: A Prática da Bênção</h2>
+                         <p class="text-3xl text-slate-300"><b class="text-indigo-400">Verdade Central:</b> O GC é um corpo que vive 24/7. A bênção acontece <b class="text-indigo-400">antes, durante e depois</b> da reunião.</p>
+                         <ul class="list-none space-y-4 text-2xl text-slate-200 mt-10 text-center mx-auto max-w-6xl grid grid-cols-3 gap-6">
+                            <li class="bg-gray-800 p-6 rounded-xl shadow-md"><b class="block text-3xl font-bold text-indigo-400 mb-2">ANTES</b>Orar e preparar o coração para servir.</li>
+                            <li class="bg-gray-800 p-6 rounded-xl shadow-md"><b class="block text-3xl font-bold text-indigo-400 mb-2">DURANTE</b>Estar presente, engajado e usar os dons.</li>
+                            <li class="bg-gray-800 p-6 rounded-xl shadow-md"><b class="block text-3xl font-bold text-indigo-400 mb-2">DEPOIS</b>Cuidar, orar e manter o contacto.</li>
+                        </ul>
+                    </div>
+                `
+            },
+             {
+                espectador: `
+                    <div class="text-white text-center">
+                        <div class="max-w-3xl">
+                             <h2 class="text-6xl font-bold mb-6">Meu Compromisso</h2>
+                             <p class="text-4xl text-indigo-200">A Missão de Um</p>
+                             <p class="text-2xl text-indigo-200 bg-indigo-900/50 p-6 rounded-xl mt-10">Escolher **UMA** pessoa do meu GC para abençoar intencionalmente esta semana.</p>
+                        </div>
+                    </div>
                 `
             },
             {
                 espectador: `
-                    <h1>O Desafio da Semana</h1>
-                    <h3>Sua missão:</h3>
-                    <p>Escolha <strong>UMA</strong> pessoa do seu GC e abençoe-a intencionalmente esta semana.</p>
-                    <p><em>Vamos orar.</em></p>
+                    <div class="text-center">
+                        <h2 class="text-7xl font-bold text-indigo-400">Obrigado!</h2>
+                        <p class="text-2xl text-slate-400 mt-6">&copy; 2025 | Workshop GC Abençoador</p>
+                    </div>
                 `
             }
         ];
@@ -175,19 +242,18 @@
             presentationRef.on('value', (snapshot) => {
                 const slideIndex = snapshot.val();
                 
-                slideContent.classList.add('fade-out');
+                slideContent.classList.add('is-fading');
 
                 setTimeout(() => {
                     if (slideIndex !== null && typeof slides !== 'undefined' && slides[slideIndex]) {
                         slideContent.innerHTML = slides[slideIndex].espectador;
                     } else {
-                        slideContent.innerHTML = "<h2>Aguardando o apresentador iniciar...</h2>";
+                        slideContent.innerHTML = `<h2 class="text-3xl font-bold">Aguardando o apresentador iniciar...</h2>`;
                     }
-                    slideContent.classList.remove('fade-out');
-                }, 250);
+                    slideContent.classList.remove('is-fading');
+                }, 300);
             });
         });
     </script>
 </body>
 </html>
-
