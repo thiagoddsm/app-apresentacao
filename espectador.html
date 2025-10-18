@@ -13,19 +13,20 @@
         </div>
     </div>
 
+    <!-- SDKs do Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // COLE AQUI O MESMO OBJETO firebaseConfig
+        // SUA CONFIGURAÇÃO DO FIREBASE
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY",
-            authDomain: "SEU_AUTH_DOMAIN",
-            databaseURL: "SUA_DATABASE_URL",
-            projectId: "SEU_PROJECT_ID",
-            storageBucket: "SEU_STORAGE_BUCKET",
-            messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-            appId: "SEU_APP_ID"
+            apiKey: "AIzaSyC8a1ViD4lRkhJ5hBaJLVbzm3JH8XhZdZQ",
+            authDomain: "studio-7497577336-6d2b4.firebaseapp.com",
+            databaseURL: "https://studio-7497577336-6d2b4-default-rtdb.firebaseio.com",
+            projectId: "studio-7497577336-6d2b4",
+            storageBucket: "studio-7497577336-6d2b4.appspot.com", // Corrigido para o formato correto do SDK 8
+            messagingSenderId: "283066125474",
+            appId: "1:283066125474:web:65b010e98b4b0c5b5b1bfb"
         };
 
         // Inicializa o Firebase
@@ -42,8 +43,10 @@
         // Ouve as mudanças no banco de dados em tempo real
         presentationRef.on('value', (snapshot) => {
             const slideIndex = snapshot.val();
-            if (slideIndex !== null && slides[slideIndex]) {
+            if (slideIndex !== null && slides && slides[slideIndex]) {
                 slideContent.innerHTML = slides[slideIndex].espectador;
+            } else if (slideIndex === null) {
+                slideContent.innerHTML = "<h2>Aguardando o apresentador iniciar...</h2>";
             }
         });
     </script>
