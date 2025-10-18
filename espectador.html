@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apresentação</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container espectador">
-        <div id="slide-content" class="slide">
-            <h2>Aguardando o apresentador iniciar...</h2>
-        </div>
+    <!-- Container principal do slide -->
+    <div id="slide-content" class="slide-container">
+        <h2>Aguardando o apresentador iniciar...</h2>
     </div>
 
     <!-- SDKs do Firebase -->
@@ -24,7 +30,7 @@
             authDomain: "studio-7497577336-6d2b4.firebaseapp.com",
             databaseURL: "https://studio-7497577336-6d2b4-default-rtdb.firebaseio.com",
             projectId: "studio-7497577336-6d2b4",
-            storageBucket: "studio-7497577336-6d2b4.appspot.com", // Corrigido para o formato correto do SDK 8
+            storageBucket: "studio-7497577336-6d2b4.appspot.com",
             messagingSenderId: "283066125474",
             appId: "1:283066125474:web:65b010e98b4b0c5b5b1bfb"
         };
@@ -34,21 +40,154 @@
         const database = firebase.database();
     </script>
 
-    <script src="script.js"></script>
     <script>
-        // Lógica específica do Espectador
-        const slideContent = document.getElementById('slide-content');
-        const presentationRef = database.ref('presentation/currentSlide');
-
-        // Ouve as mudanças no banco de dados em tempo real
-        presentationRef.on('value', (snapshot) => {
-            const slideIndex = snapshot.val();
-            if (slideIndex !== null && slides && slides[slideIndex]) {
-                slideContent.innerHTML = slides[slideIndex].espectador;
-            } else if (slideIndex === null) {
-                slideContent.innerHTML = "<h2>Aguardando o apresentador iniciar...</h2>";
+        // CONTEÚDO DOS SLIDES EMBUTIDO DIRETAMENTE AQUI
+        const slides = [
+            {
+                apresentador: `...`, // O conteúdo do apresentador não é usado aqui, mas mantido por consistência
+                espectador: `
+                    <h1>Workshop:</h1>
+                    <h2>Como ser um Membro de GC Abençoador</h2>
+                    <br>
+                    <h3>"Farei de você um grande povo, e o abençoarei. Tornarei famoso o seu nome, e você será uma bênção."</h3>
+                    <p>Gênesis 12:2</p>
+                `
+            },
+            {
+                espectador: `
+                    <h2>Quebra-Gelo</h2>
+                    <p>Pense numa pessoa que, só por estar no seu GC, o torna um lugar melhor.</p>
+                    <h3>Partilhe com a pessoa ao seu lado:</h3>
+                    <p>Que característica ou atitude essa pessoa tem que abençoa tanto o grupo?</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>O que é um "MEMBRO"?</h1>
+                    <p>É ser parte de um corpo, interdependente.</p>
+                    <h3>"somos um só corpo em Cristo, e cada membro está ligado a todos os outros."</h3>
+                    <p>Romanos 12:5</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>O que é um "ABENÇOADOR"?</h1>
+                    <p>É ser um transmissor da bênção de Deus.</p>
+                    <h3>"Farei de você um grande povo... e você será uma bênção."</h3>
+                    <p>Gênesis 12:2</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>O que é um "GC"?</h1>
+                    <p>Um grupo que vive em comunhão (koinonia).</p>
+                    <h3>"Eles perseveravam na doutrina dos apóstolos e na comunhão..."</h3>
+                    <p>Atos 2:42</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>Pilar 1: A Fonte da Bênção</h1>
+                    <h3>Deus é a Fonte. Nós somos o Canal.</h3>
+                    <p>"Toda boa dádiva e todo dom perfeito vêm do alto..."</p>
+                    <p>Tiago 1:17</p>
+                `
+            },
+            {
+                espectador: `
+                    <h2>Aplicação da Dinâmica</h2>
+                    <p>Quando estamos cheios de Deus, naturalmente transbordamos Sua presença.</p>
+                    <h2>Quer ser uma bênção?</h2>
+                    <p>A resposta não é "se esforce mais".<br>É <strong>"se encha mais"</strong>.</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>Pilar 2: De Consumidor a Catalisador</h1>
+                    <p>"transformem-se pela renovação da sua mente..."</p>
+                    <p>Romanos 12:2</p>
+                    <h3>Consumidor: "O que eu ganho?"</h3>
+                    <h3>Catalisador: "Como posso servir?"</h3>
+                `
+            },
+            {
+                espectador: `
+                    <h2>As 4 Fases do Crescimento</h2>
+                    <ol>
+                        <li><strong>Receptor:</strong> "Eu sou cuidado."</li>
+                        <li><strong>Acomodado:</strong> "Eu participo."</li>
+                        <li><strong>Canal de Bênção:</strong> "Eu cuido dos outros."</li>
+                        <li><strong>Multiplicador:</strong> "Eu formo outros."</li>
+                    </ol>
+                    <h3>Onde você se vê hoje?</h3>
+                `
+            },
+            {
+                espectador: `
+                    <h2>Atividade: Cenário 1</h2>
+                    <h3>"Chega um visitante no GC."</h3>
+                    <p><strong>Consumidor:</strong> Espera que o líder o apresente.</p>
+                    <p><strong>Catalisador:</strong> Vai até ele e o inclui na conversa.</p>
+                `
+            },
+            {
+                espectador: `
+                    <h2>Atividade: Cenário 2</h2>
+                    <h3>"Um membro partilha uma dificuldade."</h3>
+                    <p><strong>Consumidor:</strong> Ouve passivamente.</p>
+                    <p><strong>Catalisador:</strong> Ouve, ora e acompanha depois.</p>
+                `
+            },
+            {
+                espectador: `
+                    <h1>Pilar 3: A Prática da Bênção (24/7)</h1>
+                    <ul>
+                        <li><strong>Antes:</strong> Ore por oportunidades.</li>
+                        <li><strong>Durante:</strong> Esteja presente.</li>
+                        <li><strong>Depois:</strong> Acompanhe e cuide.</li>
+                    </ul>
+                `
+            },
+            {
+                espectador: `
+                    <h1>Recapitulando</h1>
+                    <h2>1. Comece com sua IDENTIDADE.</h2>
+                    <h2>2. Seja o CANAL, não a fonte.</h2>
+                    <h2>3. Mude de CONSUMIDOR para CATALISADOR.</h2>
+                `
+            },
+            {
+                espectador: `
+                    <h1>O Desafio da Semana</h1>
+                    <h3>Sua missão:</h3>
+                    <p>Escolha <strong>UMA</strong> pessoa do seu GC e abençoe-a intencionalmente esta semana.</p>
+                    <p><em>Vamos orar.</em></p>
+                `
             }
+        ];
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slideContent = document.getElementById('slide-content');
+            const presentationRef = database.ref('presentation/currentSlide');
+
+            presentationRef.on('value', (snapshot) => {
+                const slideIndex = snapshot.val();
+                
+                slideContent.classList.add('fade-out');
+
+                setTimeout(() => {
+                    if (slideIndex !== null && typeof slides !== 'undefined' && slides[slideIndex]) {
+                        slideContent.innerHTML = slides[slideIndex].espectador;
+                    } else {
+                        slideContent.innerHTML = "<h2>Aguardando o apresentador iniciar...</h2>";
+                    }
+                    slideContent.classList.remove('fade-out');
+                }, 250);
+            });
         });
     </script>
 </body>
 </html>
+
