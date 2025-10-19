@@ -3,45 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workshop GC Abençoador</title>
+    <title>Apresentação</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-         html, body {
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: #111827; /* bg-gray-900 */
-            color: #d1d5db; /* text-gray-300 */
-        }
-        .slide-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
-        }
-        .fade-transition {
-            transition: opacity 0.3s ease-in-out;
-        }
-        .is-fading {
-            opacity: 0;
-        }
-    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Container principal do slide -->
-    <div id="slide-content" class="slide-container fade-transition">
-        <h2 class="text-3xl font-bold">Aguardando o apresentador iniciar...</h2>
+    <div id="slide-content" class="slide-container">
+        <h2 class="text-2xl md:text-3xl">Aguardando o apresentador iniciar...</h2>
     </div>
 
     <!-- SDKs do Firebase -->
@@ -49,7 +24,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // CONFIGURAÇÃO DO FIREBASE (já preenchida com os seus dados)
+        // SUA CONFIGURAÇÃO DO FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyC8a1ViD4lRkhJ5hBaJLVbzm3JH8XhZdZQ",
             authDomain: "studio-7497577336-6d2b4.firebaseapp.com",
@@ -63,9 +38,26 @@
         const database = firebase.database();
     </script>
     
-    <!-- Carrega o conteúdo dos slides -->
-    <script src="script.js"></script>
-
+    <script>
+        // CONTEÚDO DOS SLIDES (APENAS A PARTE DO ESPECTADOR É NECESSÁRIA AQUI)
+        const slides = [
+            { espectador: `<div class="p-4"><h1 class="text-5xl md:text-7xl font-extrabold">Workshop</h1><p class="text-2xl md:text-4xl text-indigo-300 mt-4">Como ser um Membro de GC Abençoador</p></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-4xl md:text-5xl font-bold text-indigo-400">Quebra-Gelo</h2><div class="mt-8 bg-gray-800 p-6 md:p-10 rounded-2xl text-xl md:text-2xl text-left max-w-3xl"><p class="mb-4">Pense numa pessoa que, só por estar no seu GC, o torna um lugar melhor.</p><p class="font-semibold text-indigo-300">Partilhe com quem está ao seu lado:<br>"Que característica ou atitude essa pessoa tem?"</p></div></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">O Alicerce: Quem Nós Somos</h2><p class="text-2xl md:text-3xl text-slate-300 mt-6 max-w-4xl">Nosso alvo é entender como um <b class="text-indigo-400">MEMBRO</b> pode ser <b class="text-indigo-400">ABENÇOADOR</b> dentro de um <b class="text-indigo-400">GC</b>.</p></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">MEMBRO</h2><p class="text-2xl md:text-3xl text-slate-300 mt-4">Parte interdependente de um corpo.</p><blockquote class="text-xl md:text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-8 max-w-2xl mx-auto">"...assim também nós, embora muitos, somos um só corpo em Cristo, e cada membro está ligado a todos os outros." (Romanos 12:5)</blockquote></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">ABENÇOADOR</h2><p class="text-2xl md:text-3xl text-slate-300 mt-4">Um transmissor da bênção de Deus.</p><blockquote class="text-xl md:text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-8 max-w-3xl mx-auto">"Farei de você um grande povo, e o abençoarei. Tornarei famoso o seu nome, e você será uma bênção." (Gênesis 12:2)</blockquote></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">GC (Grupo de Comunhão)</h2><p class="text-2xl md:text-3xl text-slate-300 mt-4">Um grupo que persevera em comunhão.</p><blockquote class="text-xl md:text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-8 max-w-3xl mx-auto">"Eles perseveravam na doutrina dos apóstolos e na comunhão [koinonia], no partir do pão e nas orações." (Atos 2:42)</blockquote></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">Pilar 1: A Fonte da Bênção</h2><p class="text-2xl md:text-3xl text-indigo-300 mt-6">Verdade Central: Não somos a fonte, somos o canal.</p><p class="text-xl md:text-2xl text-slate-300 mt-8">Só podemos transmitir aquilo que já recebemos de Deus.</p></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-4xl md:text-5xl font-bold text-indigo-400">Aplicação: O Transbordar</h2><div class="mt-8 bg-gray-800 p-6 md:p-10 rounded-2xl text-xl md:text-2xl space-y-4 text-slate-200 max-w-3xl"><p>Quando nos enchemos de Deus, o resultado natural é <b class="font-semibold text-white">transbordar</b> sobre as pessoas ao nosso redor.</p><p class="mt-4 font-bold text-yellow-300">Quer ser uma bênção? Encha-se de Deus.</p></div></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">Pilar 2: A Atitude da Bênção</h2><p class="text-2xl md:text-3xl text-indigo-300 mt-6">Troque a atitude de <b class="text-red-400">Consumidor</b> pela de <b class="text-green-400">Catalisador</b>.</p><blockquote class="text-xl md:text-2xl border-l-4 border-slate-500 pl-6 italic text-slate-400 mt-8 max-w-3xl mx-auto">"Não se amoldem ao padrão deste mundo, mas transformem-se pela renovação da sua mente..." (Romanos 12:2)</blockquote></div>`},
+            { espectador: `<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 text-center"><div class="bg-red-900/50 border-2 border-red-500 p-6 md:p-8 rounded-2xl"><h3 class="text-3xl md:text-4xl font-bold text-red-400">Consumidor</h3><p class="text-xl md:text-2xl text-red-300 mt-4">"O que este GC pode fazer por mim?"</p></div><div class="bg-green-900/50 border-2 border-green-500 p-6 md:p-8 rounded-2xl"><h3 class="text-3xl md:text-4xl font-bold text-green-400">Catalisador</h3><p class="text-xl md:text-2xl text-green-300 mt-4">"Quem posso abençoar neste GC?"</p></div></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-4xl md:text-5xl font-bold mb-8">As 4 Fases do Crescimento</h2><div class="text-xl md:text-2xl text-left bg-gray-800 p-8 rounded-xl max-w-md"><p class="mb-2"><b class="text-indigo-400">1. O Receptor:</b> "Eu sou cuidado."</p><p class="mb-2"><b class="text-indigo-400">2. O Acomodado:</b> "Eu participo."</p><p class="mb-2"><b class="text-indigo-400">3. O Canal de Bênção:</b> "Eu cuido dos outros."</p><p><b class="text-indigo-400">4. O Multiplicador:</b> "Eu formo catalisadores."</p></div><p class="mt-6 text-2xl">Onde me vejo hoje?</p></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-4xl md:text-5xl font-bold text-indigo-400">Atividade em Grupo</h2><div class="mt-8 text-xl md:text-2xl space-y-6 max-w-3xl"><p class="bg-gray-800 p-6 rounded-xl"><b>Cenário 1:</b> Chega um visitante no GC, tímido e desconfortável.</p><p class="bg-gray-800 p-6 rounded-xl"><b>Cenário 2:</b> Um membro partilha sobre uma dificuldade que tem enfrentado.</p></div></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold">Pilar 3: A Prática da Bênção</h2><p class="text-2xl md:text-3xl text-slate-300 mt-6">O GC é um corpo que vive 24/7.</p><div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-lg md:text-xl max-w-6xl"><div class="bg-gray-800 p-6 rounded-xl"><b class="block text-2xl md:text-3xl font-bold text-indigo-400 mb-2">ANTES</b>Orar e preparar o coração para servir.</div><div class="bg-gray-800 p-6 rounded-xl"><b class="block text-2xl md:text-3xl font-bold text-indigo-400 mb-2">DURANTE</b>Estar presente, engajado e usar os dons.</div><div class="bg-gray-800 p-6 rounded-xl"><b class="block text-2xl md:text-3xl font-bold text-indigo-400 mb-2">DEPOIS</b>Cuidar, orar e manter o contacto.</div></div></div>`},
+            { espectador: `<div class="p-4"><h2 class="text-5xl md:text-6xl font-bold text-indigo-400">Meu Compromisso</h2><p class="text-2xl md:text-3xl mt-4">A Missão de Um</p><div class="mt-8 text-xl md:text-2xl bg-gray-800 p-8 rounded-xl max-w-3xl"><p>Escolher <b>UMA</b> pessoa do meu GC para abençoar intencionalmente esta semana.</p></div></div>`}
+        ];
+    </script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const slideContent = document.getElementById('slide-content');
@@ -74,18 +66,23 @@
             presentationRef.on('value', (snapshot) => {
                 const slideIndex = snapshot.val();
                 
-                slideContent.classList.add('is-fading');
+                // Adiciona uma classe para o efeito de fade-out
+                slideContent.classList.add('fade-out');
 
                 setTimeout(() => {
+                    // Atualiza o conteúdo após a transição
                     if (slideIndex !== null && typeof slides !== 'undefined' && slides[slideIndex]) {
                         slideContent.innerHTML = slides[slideIndex].espectador;
                     } else {
-                        slideContent.innerHTML = `<h2 class="text-3xl font-bold">Aguardando o apresentador iniciar...</h2>`;
+                        slideContent.innerHTML = `<h2 class="text-2xl md:text-3xl">Aguardando o apresentador iniciar...</h2>`;
                     }
-                    slideContent.classList.remove('is-fading');
-                }, 300);
+                    // Remove a classe para o efeito de fade-in
+                    slideContent.classList.remove('fade-out');
+                }, 250); // Este tempo deve corresponder à duração da transição no CSS
             });
         });
     </script>
 </body>
 </html>
+
+
