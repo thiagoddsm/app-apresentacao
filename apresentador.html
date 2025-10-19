@@ -13,10 +13,15 @@
     <style>
         html, body {
             height: 100%;
-            overflow: hidden;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+        /* No mobile, queremos que a altura do body seja automática para permitir a rolagem */
+        @media (max-width: 767px) {
+            html, body {
+                height: auto;
+            }
         }
         /* Efeito de fade para a transição dos slides */
         .fade-transition {
@@ -32,8 +37,8 @@
     <main class="flex flex-col md:flex-row h-screen">
         
         <!-- Coluna Esquerda: Visual do Espectador (empilha em mobile) -->
-        <div class="w-full md:w-2/3 h-3/5 md:h-full bg-gray-900 flex flex-col justify-center items-center p-4 md:p-8 relative">
-            <div id="slide-viewer-content" class="w-full h-full flex flex-col justify-center items-center text-white fade-transition">
+        <div class="w-full md:w-2/3 h-[60vh] md:h-full bg-gray-900 flex flex-col justify-center items-center p-4 md:p-8 relative">
+            <div id="slide-viewer-content" class="w-full h-full flex flex-col justify-center items-center text-white text-center fade-transition">
                 <!-- Conteúdo do slide do espectador injetado aqui -->
             </div>
             <!-- Controles de navegação sobre a tela principal -->
@@ -49,8 +54,8 @@
         </div>
 
         <!-- Coluna Direita: Notas do Palestrante (empilha em mobile) -->
-        <div class="w-full md:w-1/3 h-2/5 md:h-full bg-white overflow-y-auto">
-            <div id="speaker-notes-content" class="p-6 md:p-8 prose lg:prose-xl fade-transition">
+        <div class="w-full md:w-1/3 md:h-full bg-white overflow-y-auto">
+            <div id="speaker-notes-content" class="p-6 md:p-8 prose prose-lg md:prose-xl max-w-none fade-transition">
                  <!-- Notas do apresentador injetadas aqui -->
             </div>
         </div>
@@ -295,27 +300,21 @@
             function updateSlide() {
                 if (typeof slides !== 'undefined' && slides[currentSlideIndex]) {
                     
-                    // Adiciona classe para iniciar o fade-out
                     slideViewer.classList.add('is-fading');
                     speakerNotes.classList.add('is-fading');
 
                     setTimeout(() => {
-                        // Atualiza o conteúdo
                         slideViewer.innerHTML = slides[currentSlideIndex].espectador;
                         speakerNotes.innerHTML = slides[currentSlideIndex].apresentador;
                         
-                        // Atualiza os controles
                         slideCounter.textContent = `${currentSlideIndex + 1} / ${slides.length}`;
                         prevBtn.disabled = currentSlideIndex === 0;
                         nextBtn.disabled = currentSlideIndex === slides.length - 1;
 
-                        // Remove a classe para fazer o fade-in
                         slideViewer.classList.remove('is-fading');
                         speakerNotes.classList.remove('is-fading');
-                    }, 300); // Tempo para o fade-out terminar
+                    }, 300);
 
-                    // PONTO PRINCIPAL DA SINCRONIZAÇÃO:
-                    // Envia o índice do slide atual para o Firebase.
                     presentationRef.set(currentSlideIndex);
                 }
             }
@@ -342,7 +341,6 @@
                 if (e.key === 'ArrowLeft') prevSlide();
             });
 
-            // Inicia a apresentação no primeiro slide
             updateSlide();
         });
     </script>
